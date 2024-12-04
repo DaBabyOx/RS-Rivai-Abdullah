@@ -245,6 +245,7 @@ const styles = StyleSheet.create({
     textAlign: 'left',
   },
   buttonContainer: {
+    marginTop: 20,
     alignItems: 'center',
     width: '100%',
     marginBottom: 20,

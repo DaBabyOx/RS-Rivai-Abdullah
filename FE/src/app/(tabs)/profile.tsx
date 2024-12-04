@@ -30,7 +30,8 @@ function LoggedInView({ onLogout }: any) {
         source={{ uri: 'https://via.placeholder.com/100' }} // Ganti URL dengan gambar profil Anda
       />
       <Text style={styles.name}>Mariko</Text>
-      <Text style={styles.email}>marikopratama@gmail.com</Text>
+      <Text style={styles.email}>mariko.pratma@gmail.com</Text>
+
       <TouchableOpacity style={styles.editProfileButton}>
         <Text style={styles.editProfileText}>Edit profile</Text>
       </TouchableOpacity>
@@ -79,25 +80,29 @@ function LoggedOutView({ onLogin }: any) {
   return (
     // Safeareview = agar area design tidak terpotong/diluar frame device
     <SafeAreaView style={styles.container}>
-        <Text style={styles.loggedOutText}>Account</Text>
-        <View style={styles.infoStyle}>
-          {/* Translate section */}
-          <View style={styles.translateButton}>
-            <MaterialIcons name="translate" size={24} color="#6BCB77" />
+      <Text style={styles.loggedOutText}>Account</Text>
+      <View style={styles.infoStyle}>
+        {/* Translate section */}
+        <View style={styles.translateBtnContainer}>
+          <TouchableOpacity style={styles.btnOpacity}>
+            <MaterialIcons name="translate" size={20} color="#6BCB77" />
             <Text>Translate</Text>
-          </View>
-          {/* Help section */}
-          <View style={styles.helpButton}>
-            <AntDesign name="questioncircleo" size={24} color="#6BCB77" />
-            <Text>Help</Text>
-          </View>
-        </View>
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.loginButton} onPress={onLogin}>
-            <Text style={styles.loginButtonText}>Login</Text>
           </TouchableOpacity>
-          <Text style={styles.versionStyle}>Version 5.0.19</Text>
         </View>
+        {/* Help section */}
+        <View style={styles.helpButton}>
+          <TouchableOpacity style={styles.btnOpacity}>
+            <AntDesign name="questioncircleo" size={20} color="#6BCB77" />
+            <Text>Help</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity style={styles.loginButton} onPress={onLogin}>
+          <Text style={styles.loginButtonText}>Login</Text>
+        </TouchableOpacity>
+        <Text style={styles.versionStyle}>Version 5.0.19</Text>
+      </View>
 
     </SafeAreaView>
   );
@@ -213,14 +218,24 @@ const styles = StyleSheet.create({
     // padding: 
     width: '100%',
   },
-  translateButton: {
+  translateBtnContainer: {
     padding: 10,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-start',
     textAlign: 'center',
-    gap: 10,
     width: '100%',
+  },
+  btnOpacity: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    backgroundColor: 'transparent',
+    borderRadius: 10,
+    paddingVertical: 5,
+    paddingHorizontal: 15,
+    marginBottom: 1,
+    gap: 10,
   },
   helpButton: {
     padding: 10,
@@ -228,7 +243,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
     textAlign: 'left',
-    gap: 10,
   },
   buttonContainer: {
     alignItems: 'center',

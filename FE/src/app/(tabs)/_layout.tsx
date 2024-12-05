@@ -44,7 +44,7 @@ export default function TabLayout() {
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
         tabBarStyle: {
-          backgroundColor: '#0BAF9A', height: 66, 
+          backgroundColor: '#0BAF9A', height: 95, 
         },
         tabBarIconStyle:{
           marginBottom: -5,

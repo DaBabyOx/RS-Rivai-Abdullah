@@ -1,4 +1,3 @@
-import { StyleSheet } from 'react-native';
 import React, { useState } from 'react';
 import { LoggedOutViewClass } from '../../profile-components/LoggedOutViewClass';
 import { LoggedInViewClass } from '../../profile-components/LoggedInViewClass';

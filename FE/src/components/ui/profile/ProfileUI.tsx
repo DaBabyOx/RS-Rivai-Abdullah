@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { LoggedOutViewClass } from '../../profile-components/LoggedOutViewClass';
-import { LoggedInViewClass } from '../../profile-components/LoggedInViewClass';
+import { LoggedOutViewClass } from '../../profile-components/LoggedOutView/LoggedOutViewClass';
+import { LoggedInViewClass } from '../../profile-components/LoggedInView/LoggedInViewClass';
 
 
 export function LoggedInView({ onLogout }: any) {

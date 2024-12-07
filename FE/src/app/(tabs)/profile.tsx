@@ -1,4 +1,4 @@
-import { StyleSheet, View } from 'react-native';
+import { SafeAreaView, ScrollView, StyleSheet, View } from 'react-native';
 import React, { useState } from 'react';
 import { LoggedInView, LoggedOutView } from '@/src/components/ui/profile/ProfileUI';
 
@@ -7,13 +7,18 @@ export default function Jadwal() {
   const [loggedIn, setLoggedIn] = useState(false);
 
   return (
-    <View style={styles.container}>
-      {loggedIn ? (
-        <LoggedInView onLogout={() => setLoggedIn(false)} />
-      ) : (
-        <LoggedOutView onLogin={() => setLoggedIn(true)} />
-      )}
-    </View>
+    // <SafeAreaView>
+    <ScrollView contentContainerStyle={{ flexGrow: 1 }} showsVerticalScrollIndicator={false}>
+
+        <View style={styles.container}>
+          {loggedIn ? (
+            <LoggedInView onLogout={() => setLoggedIn(false)} />
+          ) : (
+            <LoggedOutView onLogin={() => setLoggedIn(true)} />
+          )}
+        </View>
+      </ScrollView>
+    // </SafeAreaView>
   );
 }
 
@@ -24,6 +29,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     backgroundColor: '#F8F9FA',
     padding: 5,
-    width: '100%'
+    width: '100%',
+    height: '100%'
   }
 });

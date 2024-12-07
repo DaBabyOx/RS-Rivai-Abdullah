@@ -147,7 +147,7 @@ export default function Home() {
       
 
       {/* Bagian yang bisa di scroll */}
-      <ScrollView contentContainerStyle={styles.scrollContainer}>
+      <ScrollView contentContainerStyle={styles.scrollContainer} showsVerticalScrollIndicator={false}>
         
 
         {/* Berita & Penawaran Khusus */}

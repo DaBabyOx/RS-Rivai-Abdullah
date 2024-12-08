@@ -1,6 +1,6 @@
 import { SafeAreaView, ScrollView, StyleSheet, View } from 'react-native';
 import React, { useState } from 'react';
-import { LoggedInView, LoggedOutView } from '@/src/components/ui/profile/ProfileUI';
+import { LoggedInView, LoggedOutView } from '@/src/app/ui/profile/ProfileUI';
 
 
 export default function Jadwal() {

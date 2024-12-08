@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity, Image, TextInput, Keyboard, BackHandler, FlatList, Dimensions, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Image, TextInput, Keyboard, BackHandler, FlatList, Dimensions, ScrollView, SafeAreaView } from 'react-native';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
@@ -80,18 +80,17 @@ export default function Home() {
 
   return (
     // Bagian Fixed
-    <View style={styles.container}>
-
-
+    <SafeAreaView style={styles.container}>
+    {/* <View style={styles.container}> */}
       {/* Top Box */}
       <View style={styles.topBox}>
         {/* Container for Hamburger + Pendaftaran and Darurat */}
         <View style={styles.HaDafDar}>
           {/* Hamburger + Pendaftaran */}
           <View style={styles.kiribang}>
-            <TouchableOpacity style={styles.hamburger}>
+            {/* <TouchableOpacity style={styles.hamburger}>
               <FontAwesome name="bars" size={24} color="black" />
-            </TouchableOpacity>
+            </TouchableOpacity> */}
             <Logo height={25} width={188.17}/>
           </View>
           {/* Darurat */}
@@ -204,13 +203,15 @@ export default function Home() {
           <Text style={{fontSize: 10, color: 'white'}}>RSUP DR. RIVAI ABDULLAH PALEMBANG</Text>
         </View>
       </ScrollView>
-    </View>
+    {/* </View> */}
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    width: '100%'
   },
 
 
@@ -247,7 +248,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     alignItems: 'center',
     justifyContent: 'space-between',
-    width: '95%',
+    width: '100%',
   },
   hamburger: {
     padding: 5,
@@ -297,7 +298,7 @@ const styles = StyleSheet.create({
   barContainer:{
     flexDirection: 'row',
     alignItems: 'center',
-    width: '90%',
+    width: '95%',
     backgroundColor: 'white',
     borderRadius: 5,
     marginTop: 10,
@@ -341,7 +342,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   leBar:{
-    width: '90%',
+    width: '95%',
     height: 88,
     backgroundColor: '#0BAF9A',
     flexDirection: 'row',
@@ -370,6 +371,7 @@ const styles = StyleSheet.create({
   },
   containerBerita:{
     alignItems: 'flex-start',
+    justifyContent: 'center',
     width: '90%',
   },
   textBerita:{

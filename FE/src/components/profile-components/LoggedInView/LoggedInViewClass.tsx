@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
         fontWeight: 'semibold',
     },
     infoStyle: {
-        width: '95%',
+        width: '100%',
         paddingVertical: 20,
         gap: 20,
     },

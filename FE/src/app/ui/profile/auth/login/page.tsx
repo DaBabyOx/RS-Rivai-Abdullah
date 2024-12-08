@@ -1,15 +1,16 @@
-import { View, Text, TouchableOpacity, TextInput } from 'react-native'
+import { View, Text, TouchableOpacity, TextInput, SafeAreaView } from 'react-native'
 import React, { useState } from 'react'
-import { styles } from '@/src/components/profile-components/LoggedOutView/LoggedOutViewClass'
 import Ionicons from '@expo/vector-icons/Ionicons'
 import SimpleLineIcons from '@expo/vector-icons/SimpleLineIcons'
-
-export default function LoginPage({ onLogin , onSwitchView }: any) {
+import { handleDateChange } from '@/src/utils/DateUtils'
+import { styles } from '@/src/utils/UiUtils'
+import { router} from 'expo-router'
+export default function LoginPage({ onLogin, onSwitchView}: any) {
     const [selectedDate, setSelectedDate] = useState<string>('');
     const [isError, setIsError] = useState<boolean>(false);
-    
+
     return (
-        <>
+        <SafeAreaView style={styles.contentContainer}>
             <Text style={styles.loginHeaderTextStyle}>Login Account</Text>
             <View style={styles.loginHeaderContainer}>
                 <Text style={styles.loginDescStyle}>Silahkan login terlebih dahulu dengan menggunakan No. Rekam Medik dan tanggal lahir anda.</Text>
@@ -32,6 +33,7 @@ export default function LoginPage({ onLogin , onSwitchView }: any) {
                         }}
                     />
                     <TextInput
+                        keyboardType='default'
                         placeholder="No. Rekam Medik"
                         style={styles.inputStyle}
                     />
@@ -56,7 +58,7 @@ export default function LoginPage({ onLogin , onSwitchView }: any) {
                         keyboardType="number-pad"  // Hanya menerima angka
                         maxLength={10}  // Membatasi panjang input menjadi 10 karakter (DD-MM-YYYY)
                         value={selectedDate}  // Menampilkan value yang sudah diformat
-                        onChangeText={(text) => handleDateChange(text, setSelectedDate, setIsError))}  // Menangani perubahan input
+                        onChangeText={(text) => handleDateChange(text, setSelectedDate, setIsError)}  // Menangani perubahan input
                         style={[
                             styles.inputStyle,
                             { borderColor: isError ? 'red' : '#0BAF9A' }
@@ -86,7 +88,7 @@ export default function LoginPage({ onLogin , onSwitchView }: any) {
                 </View>
                 <View style={{ justifyContent: 'center', flexDirection: 'row', alignItems: 'center', gap: 5 }}>
                     <Text>Belum punya akun?</Text>
-                    <TouchableOpacity onPress={onSwitchView}>
+                    <TouchableOpacity onPress={() => router.push('/ui/profile/auth/register/page')}>
                         <Text style={styles.haveNoAccountStyle}>Buat sekarang</Text>
                     </TouchableOpacity>
                 </View>
@@ -98,7 +100,7 @@ export default function LoginPage({ onLogin , onSwitchView }: any) {
                 </View>
 
                 <View style={{ gap: 10, width: '98%' }}>
-                    <TouchableOpacity style={styles.loginOptionButton}>
+                    <TouchableOpacity style={styles.loginOptionButton} onPress={() => router.push('/ui/profile/auth/phone-auth/page')}> 
                         <Ionicons name="call-outline" size={20} color="black" style={{ marginRight: 10 }} />
                         <Text style={styles.loginOptionText}>Continue With Phone</Text>
                     </TouchableOpacity>
@@ -109,6 +111,6 @@ export default function LoginPage({ onLogin , onSwitchView }: any) {
                     </TouchableOpacity>
                 </View>
             </View>
-        </>
+        </SafeAreaView>
     )
 }

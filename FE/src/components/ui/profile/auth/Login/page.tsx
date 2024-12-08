@@ -8,52 +8,6 @@ export default function LoginPage({ onLogin , onSwitchView }: any) {
     const [selectedDate, setSelectedDate] = useState<string>('');
     const [isError, setIsError] = useState<boolean>(false);
     
-    // Fungsi untuk menangani input dan auto-format tanggal
-    const handleDateChange = (text: string) => {
-        let formattedText = text.replace(/\D/g, ''); // Hanya angka
-
-        // Format hari (DD)
-        if (formattedText.length > 2) {
-            formattedText = formattedText.slice(0, 2) + '-' + formattedText.slice(2);
-        }
-
-        // Format bulan (MM)
-        if (formattedText.length > 5) {
-            formattedText = formattedText.slice(0, 5) + '-' + formattedText.slice(5);
-        }
-
-        // Format tahun (YYYY)
-        if (formattedText.length > 10) {
-            formattedText = formattedText.slice(0, 10);
-        }
-
-        setSelectedDate(formattedText);
-        validateDate(formattedText); // Validasi input saat pengguna mengetik
-    };
-
-    // Fungsi validasi tanggal
-    const validateDate = (date: string) => {
-        const regex = /^(\d{2})-(\d{2})-(\d{4})$/; // Format DD-MM-YYYY
-        if (!regex.test(date)) {
-            setIsError(true);
-            return;
-        }
-
-        const [day, month, year] = date.split('-').map(Number);
-
-        if (
-            day < 1 ||
-            day > 31 || // Hari tidak valid
-            month < 1 ||
-            month > 12 || // Bulan tidak valid
-            year < 1940 || // Tahun terlalu kecil
-            year > 2007
-        ) {
-            setIsError(true);
-        } else {
-            setIsError(false);
-        }
-    };
     return (
         <>
             <Text style={styles.loginHeaderTextStyle}>Login Account</Text>
@@ -102,7 +56,7 @@ export default function LoginPage({ onLogin , onSwitchView }: any) {
                         keyboardType="number-pad"  // Hanya menerima angka
                         maxLength={10}  // Membatasi panjang input menjadi 10 karakter (DD-MM-YYYY)
                         value={selectedDate}  // Menampilkan value yang sudah diformat
-                        onChangeText={handleDateChange}  // Menangani perubahan input
+                        onChangeText={(text) => handleDateChange(text, setSelectedDate, setIsError))}  // Menangani perubahan input
                         style={[
                             styles.inputStyle,
                             { borderColor: isError ? 'red' : '#0BAF9A' }

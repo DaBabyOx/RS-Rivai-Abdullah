@@ -7,6 +7,7 @@ import { useEffect } from 'react';
 import 'react-native-reanimated';
 
 import { useColorScheme } from '@/src/components/useColorScheme';
+import { StatusBar } from 'expo-status-bar';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -55,7 +56,14 @@ function RootLayoutNav() {
         <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
         <Stack.Screen name="ui/profile/auth/register/page" options={{ presentation: 'card', headerShown: false }} />
         <Stack.Screen name="ui/profile/auth/phone-auth/page" options={{ presentation: 'card', headerShown: false }} />
+        <Stack.Screen name="ui/profile/auth/phone-auth/phone-preotp/page" options={{ presentation: 'card', headerShown: false }} />
+        <Stack.Screen name="ui/profile/auth/phone-auth/phone-preotp/phone-otp/page" options={{ presentation: 'card', headerShown: false }} />
+        <Stack.Screen name="ui/profile/auth/mail-auth/page" options={{ presentation: 'card', headerShown: false }} />
+        {/* <Stack.Screen name="ui/profile/auth/mail-auth/mail-preotp/page" options={{ presentation: 'card', headerShown: false }} /> */}
+        <Stack.Screen name="ui/profile/auth/mail-auth/mail-preotp/page" options={{ presentation: 'card', headerShown: false }} />
+        <Stack.Screen name="ui/profile/auth/mail-auth/mail-preotp/mail-otp/page" options={{ presentation: 'card', headerShown: false }} />
       </Stack>
+      <StatusBar style='auto' />
     </ThemeProvider>
   );
 }

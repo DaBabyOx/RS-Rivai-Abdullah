@@ -10,7 +10,7 @@ export const styles = StyleSheet.create({
       flex: 1,
       alignItems: 'center',
       justifyContent: 'flex-start',
-      // backgroundColor: '#F8F9FA',
+      backgroundColor: '#F8F9FA',
       padding: 5,
       width: '100%',
       paddingHorizontal: 20,
@@ -18,7 +18,7 @@ export const styles = StyleSheet.create({
     },
     loginHeaderTextStyle: {
       fontSize: 30,
-      marginBottom: 40,
+      // marginBottom: 40,
       color: 'black',
       fontWeight: 'bold',
       textAlign: 'left',
@@ -130,7 +130,24 @@ export const styles = StyleSheet.create({
       fontWeight: 'bold',
       textAlign: 'left',
       alignItems: 'flex-start',
-      width: '95%',
+      width: '100%',
+      paddingTop: 40,
+    },
+    otpContainer: {
+      paddingVertical: 20,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+    
+    },
+    otpInput: {
+      width: 85,
+      height: 85,
+      borderWidth: 1,
+      borderColor: '#0BAF9A',
+      borderRadius: 8,
+      textAlign: 'center',
+      fontSize: 24,
+      marginHorizontal: 5,
     },
   });
   

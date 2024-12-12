@@ -16,14 +16,14 @@ export default function Jadwal() {
     );
   }
 
-function LoggedInView({onLogout}){
+function LoggedInView({onLogout}: any){
     return(
         <View>
             <Text>Logged In</Text>
             <Text onPress={onLogout}>Logout</Text>
         </View>);}
 
-function LoggedOutView({onLogin}){
+function LoggedOutView({onLogin}: any){
     return(
         <View>
             <Text>Logged Out</Text>

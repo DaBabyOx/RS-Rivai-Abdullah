@@ -47,7 +47,7 @@ export default function TabLayout() {
           backgroundColor: '#0BAF9A', height: 95, 
         },
         tabBarIconStyle:{
-          marginBottom: -5,
+          marginBottom: 0,
         },
         tabBarLabelStyle: {
           marginBottom: 10,

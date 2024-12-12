@@ -3,17 +3,26 @@ import { View, Text, TouchableOpacity, TextInput, Keyboard, TouchableWithoutFeed
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { styles } from "@/src/utils/UiUtils";
 import { SafeAreaView } from "react-native";
-import { dummyData, handleCheckNIK } from "@/src/utils/NikUtils";
+import { dummyData, handleCheckNIK, handleConfirm } from "@/src/utils/NikUtils"; // Pastikan import yang benar
 
 export default function RegisterPage() {
     // State declarations
-    const [nik, setNik] = useState<string>('');
-    const [nikError, setNikError] = useState<string>('');
-    const [additionalFields, setAdditionalFields] = useState<any>(null);
-    const [isDataConfirmed, setIsDataConfirmed] = useState<boolean>(false);
+    const [nik, setNik] = useState<string>(''); // NIK input state
+    const [nikError, setNikError] = useState<string>(''); // Error message state
+    const [additionalFields, setAdditionalFields] = useState<any>(null); // State untuk data dummy
+    const [isDataConfirmed, setIsDataConfirmed] = useState<boolean>(false); // Status konfirmasi data
+
+    // Fungsi untuk handle konfirmasi data
+    const handleConfirmKTP = () => {
+        if (additionalFields) {
+            setIsDataConfirmed(true); // Tandai data sudah terkonfirmasi
+            handleConfirm(); // Navigasi ke halaman OTP
+        } else {
+            setNikError("Harap cek NIK terlebih dahulu.");
+        }
+    };
 
     return (
-        // Menutup keyboard ketika mengetuk di luar area input
         <SafeAreaView style={styles.contentContainer}>
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                 <View style={styles.contentContainer}>
@@ -39,13 +48,14 @@ export default function RegisterPage() {
                         />
                         <TextInput
                             placeholder="NIK KTP"
+                            placeholderTextColor="gray"
                             keyboardType="numeric"
                             maxLength={16}
                             value={nik}
                             style={styles.inputStyle}
                             onChangeText={(text) => setNik(text)} // update state NIK
                             onSubmitEditing={() => {
-                                handleCheckNIK(nik, setNikError, setAdditionalFields, setIsDataConfirmed);
+                                handleCheckNIK(nik, setNikError, setAdditionalFields); // Validasi NIK
                                 Keyboard.dismiss();
                             }}
                         />
@@ -87,18 +97,31 @@ export default function RegisterPage() {
                         </View>
                     )}
 
-                    {/* Button to submit NIK */}
-                    <View style={styles.buttonContainer}>
-                        <View style={styles.loginButton}>
-                            <TouchableOpacity onPress={() => handleCheckNIK(nik, setNikError, setAdditionalFields, setIsDataConfirmed)}>
-                                <Text style={styles.loginButtonText}>
-                                    {isDataConfirmed ? 'Konfirmasi Data KTP' : 'Cek'}
-                                </Text>
-                            </TouchableOpacity>
+                    {/* Tombol Konfirmasi Data KTP */}
+                    {additionalFields ? (
+                        <View style={styles.buttonContainer}>
+                            <View style={styles.loginButton}>
+                                <TouchableOpacity onPress={handleConfirmKTP}>
+                                    <Text style={styles.loginButtonText}>
+                                        Konfirmasi Data KTP
+                                    </Text>
+                                </TouchableOpacity>
+                            </View>
                         </View>
-                    </View>
+
+                    ):(
+                        <View style={styles.buttonContainer}>
+                            <View style={styles.loginButton}>
+                                <TouchableOpacity onPress={() => handleCheckNIK(nik, setNikError, setAdditionalFields)}>
+                                    <Text style={styles.loginButtonText}>
+                                        Cek
+                                    </Text>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                    )}
                 </View>
             </TouchableWithoutFeedback>
-        </SafeAreaView>
+        </SafeAreaView >
     );
 }

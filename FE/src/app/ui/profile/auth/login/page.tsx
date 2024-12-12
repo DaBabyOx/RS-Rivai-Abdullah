@@ -34,6 +34,7 @@ export default function LoginPage({ onLogin, onSwitchView}: any) {
                     />
                     <TextInput
                         keyboardType='default'
+                        placeholderTextColor="gray"
                         placeholder="No. Rekam Medik"
                         style={styles.inputStyle}
                     />
@@ -55,6 +56,7 @@ export default function LoginPage({ onLogin, onSwitchView}: any) {
                     />
                     <TextInput
                         placeholder="HH-BB-TT"
+                        placeholderTextColor="gray"
                         keyboardType="number-pad"  // Hanya menerima angka
                         maxLength={10}  // Membatasi panjang input menjadi 10 karakter (DD-MM-YYYY)
                         value={selectedDate}  // Menampilkan value yang sudah diformat
@@ -105,7 +107,7 @@ export default function LoginPage({ onLogin, onSwitchView}: any) {
                         <Text style={styles.loginOptionText}>Continue With Phone</Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.loginOptionButton}>
+                    <TouchableOpacity style={styles.loginOptionButton} onPress={() => router.push('/ui/profile/auth/mail-auth/page')}>
                         <Ionicons name="mail-outline" size={20} color="black" style={{ marginRight: 10 }} />
                         <Text style={styles.loginOptionText}>Continue With Mail</Text>
                     </TouchableOpacity>

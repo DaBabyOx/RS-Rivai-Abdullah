@@ -2,6 +2,12 @@ import React, { useState } from 'react';
 import { LoggedOutViewClass } from '@/src/components/profile-components/LoggedOutView/LoggedOutViewClass';
 import { LoggedInViewClass } from '@/src/components/profile-components/LoggedInView/LoggedInViewClass';
 
+export function LoggedOutView({ onLogin }: any) {
+  return (
+    <LoggedOutViewClass onLogin={onLogin} />
+  );
+}
+
 export function LoggedInView({ onLogout }: any) {
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
   const [faceIDEnabled, setFaceIDEnabled] = useState(true);
@@ -11,8 +17,3 @@ export function LoggedInView({ onLogout }: any) {
   );
 }
 
-export function LoggedOutView({ onLogin }: any) {
-  return (
-    <LoggedOutViewClass onLogin={onLogin} />
-  );
-}

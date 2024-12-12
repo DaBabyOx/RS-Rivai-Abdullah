@@ -1,4 +1,4 @@
-import { Keyboard } from "react-native";
+import { router } from "expo-router";
 
 // Data Dummy
 export const dummyData = {
@@ -27,18 +27,24 @@ export const validateNIK = (nik: string): { isValid: boolean; errorMessage: stri
 
 // Cek NIK dan handle state
 export const handleCheckNIK = (
-    nik: string,
-    setNikError: (error: string) => void,
-    setAdditionalFields: (fields: any) => void,
-    setIsDataConfirmed: (isConfirmed: boolean) => void
+    nik: string, 
+    setNikError: (error: string) => void, 
+    setAdditionalFields: (fields: any) => void
 ) => {
     const { isValid, errorMessage } = validateNIK(nik);
 
     if (isValid) {
-        setAdditionalFields(dummyData); // Set data dummy ke state
-        setIsDataConfirmed(true); // Konfirmasi data
-        Keyboard.dismiss(); // Menutup keyboard
+        setAdditionalFields(dummyData); // Menampilkan data dummy ke state
+        setNikError(''); // Clear error message jika valid
     } else {
-        setNikError(errorMessage); // Menampilkan error
+        setNikError(errorMessage); // Menampilkan error jika NIK tidak valid
+        setTimeout(() => {
+            setNikError(''); // Clear error message setelah 1 detik 
+        }, 1000);
     }
+};
+
+// Fungsi untuk navigasi ke halaman OTP setelah konfirmasi KTP
+export const handleConfirm = () => {
+    router.push('/ui/profile/auth/phone-auth/phone-otp/page'); // Navigasi ke halaman OTP
 };

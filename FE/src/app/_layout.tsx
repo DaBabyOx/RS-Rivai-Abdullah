@@ -62,8 +62,8 @@ function RootLayoutNav() {
         {/* <Stack.Screen name="ui/profile/auth/mail-auth/mail-preotp/page" options={{ presentation: 'card', headerShown: false }} /> */}
         <Stack.Screen name="ui/profile/auth/mail-auth/mail-preotp/page" options={{ presentation: 'card', headerShown: false }} />
         <Stack.Screen name="ui/profile/auth/mail-auth/mail-preotp/mail-otp/page" options={{ presentation: 'card', headerShown: false }} />
-      </Stack>
       <StatusBar style='auto' />
+      </Stack>pe
     </ThemeProvider>
   );
 }

@@ -3,21 +3,22 @@ import React, { useState } from 'react'
 import Ionicons from '@expo/vector-icons/Ionicons'
 import SimpleLineIcons from '@expo/vector-icons/SimpleLineIcons'
 import { handleDateChange } from '@/src/utils/DateUtils'
-import { styles } from '@/src/utils/UiUtils'
-import { router} from 'expo-router'
-export default function LoginPage({ onLogin, onSwitchView}: any) {
+import { stylesImport } from '@/src/utils/UiUtils'
+import { router } from 'expo-router'
+
+export default function LoginPage({ onLogin, onSwitchView }: any) {
     const [selectedDate, setSelectedDate] = useState<string>('');
     const [isError, setIsError] = useState<boolean>(false);
 
     return (
-        <SafeAreaView style={styles.contentContainer}>
-            <Text style={styles.loginHeaderTextStyle}>Login Account</Text>
-            <View style={styles.loginHeaderContainer}>
-                <Text style={styles.loginDescStyle}>Silahkan login terlebih dahulu dengan menggunakan No. Rekam Medik dan tanggal lahir anda.</Text>
+        <SafeAreaView style={stylesImport.contentContainer}>
+            <Text style={stylesImport.loginHeaderTextStyle}>Login Account</Text>
+            <View style={stylesImport.loginHeaderContainer}>
+                <Text style={stylesImport.loginDescStyle}>Silahkan login terlebih dahulu dengan menggunakan No. Rekam Medik dan tanggal lahir anda.</Text>
                 <Text style={{ fontSize: 28, fontWeight: 'bold', color: 'black', textAlign: 'left', opacity: 0.5 }}>Login</Text>
             </View>
 
-            <View style={styles.infoStyle}>
+            <View style={stylesImport.infoStyle}>
                 {/* Input No. Rekam Medik section */}
                 <View style={{ width: '100%', position: 'relative', alignItems: 'center', justifyContent: 'center' }}>
                     <SimpleLineIcons
@@ -36,7 +37,7 @@ export default function LoginPage({ onLogin, onSwitchView}: any) {
                         keyboardType='default'
                         placeholderTextColor="gray"
                         placeholder="No. Rekam Medik"
-                        style={styles.inputStyle}
+                        style={stylesImport.inputStyle}
                     />
                 </View>
 
@@ -62,7 +63,7 @@ export default function LoginPage({ onLogin, onSwitchView}: any) {
                         value={selectedDate}  // Menampilkan value yang sudah diformat
                         onChangeText={(text) => handleDateChange(text, setSelectedDate, setIsError)}  // Menangani perubahan input
                         style={[
-                            styles.inputStyle,
+                            stylesImport.inputStyle,
                             { borderColor: isError ? 'red' : '#0BAF9A' }
                         ]}
                     />
@@ -75,41 +76,41 @@ export default function LoginPage({ onLogin, onSwitchView}: any) {
                     </Text>
                 )}
 
-                <View style={styles.forgotAccountStyle}>
+                <View style={stylesImport.forgotAccountStyle}>
                     <TouchableOpacity>
-                        <Text style={styles.forgotAccountTextStyle}>Lupa akun?</Text>
+                        <Text style={stylesImport.forgotAccountTextStyle}>Lupa akun?</Text>
                     </TouchableOpacity>
                 </View>
             </View>
 
-            <View style={styles.buttonContainer}>
-                <View style={styles.loginButton}>
+            <View style={stylesImport.buttonContainer}>
+                <View style={stylesImport.loginButton}>
                     <TouchableOpacity onPress={onLogin}>
-                        <Text style={styles.loginButtonText}>Masuk</Text>
+                        <Text style={stylesImport.loginButtonText}>Masuk</Text>
                     </TouchableOpacity>
                 </View>
                 <View style={{ justifyContent: 'center', flexDirection: 'row', alignItems: 'center', gap: 5 }}>
                     <Text>Belum punya akun?</Text>
                     <TouchableOpacity onPress={() => router.push('/ui/profile/auth/register/page')}>
-                        <Text style={styles.haveNoAccountStyle}>Buat sekarang</Text>
+                        <Text style={stylesImport.haveNoAccountStyle}>Buat sekarang</Text>
                     </TouchableOpacity>
                 </View>
 
-                <View style={styles.separatorContainer}>
-                    <View style={styles.separatorLine} />
-                    <Text style={styles.separatorText}>Or Login With</Text>
-                    <View style={styles.separatorLine} />
+                <View style={stylesImport.separatorContainer}>
+                    <View style={stylesImport.separatorLine} />
+                    <Text style={stylesImport.separatorText}>Or Login With</Text>
+                    <View style={stylesImport.separatorLine} />
                 </View>
 
                 <View style={{ gap: 10, width: '98%' }}>
-                    <TouchableOpacity style={styles.loginOptionButton} onPress={() => router.push('/ui/profile/auth/phone-auth/page')}> 
+                    <TouchableOpacity style={stylesImport.loginOptionButton} onPress={() => router.push('/ui/profile/auth/phone-auth/page')}> 
                         <Ionicons name="call-outline" size={20} color="black" style={{ marginRight: 10 }} />
-                        <Text style={styles.loginOptionText}>Continue With Phone</Text>
+                        <Text style={stylesImport.loginOptionText}>Continue With Phone</Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.loginOptionButton} onPress={() => router.push('/ui/profile/auth/mail-auth/page')}>
+                    <TouchableOpacity style={stylesImport.loginOptionButton} onPress={() => router.push('/ui/profile/auth/mail-auth/page')}>
                         <Ionicons name="mail-outline" size={20} color="black" style={{ marginRight: 10 }} />
-                        <Text style={styles.loginOptionText}>Continue With Mail</Text>
+                        <Text style={stylesImport.loginOptionText}>Continue With Mail</Text>
                     </TouchableOpacity>
                 </View>
             </View>

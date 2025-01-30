@@ -1,11 +1,7 @@
 import { StyleSheet } from 'react-native';
 
 // 'reusable code' agar tidak redundansi
-export const styles = StyleSheet.create({
-    safeArea: {
-      flex: 1,
-      width: '100%',
-    },
+export const stylesImport = StyleSheet.create({
     contentContainer: {
       flex: 1,
       alignItems: 'center',

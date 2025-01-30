@@ -10,8 +10,7 @@ import {
   FlatList,
   Dimensions,
   ScrollView,
-  SafeAreaView,
-  Animated,
+  SafeAreaView
 } from "react-native";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
@@ -24,6 +23,8 @@ import CalAdd from "@/assets/svg/calplus.svg";
 import RoadMapL from "@/assets/svg/RoadMapLight.svg";
 import RoadMapD from "@/assets/svg/RoadMapDark.svg";
 import Logo from "@/assets/svg/Logo.svg";
+import SideBar from "@/src/components/SideBar";
+import TabLayout from "./_layout";
 
 const { width } = Dimensions.get("window");
 const scale = (size: number) => (width / 500) * size;
@@ -48,6 +49,8 @@ export default function Home() {
     require("@/assets/banners/3.png"),
   ];
 
+  const toggleSidebar = () => setSidebarVisible(!sidebarVisible);
+
   useEffect(() => {
     const interval = setInterval(() => {
       setIndex((prev) => (prev === gambarBanner.length - 1 ? 0 : prev + 1));
@@ -65,8 +68,7 @@ export default function Home() {
     }
   }, [curIndex]);
 
-  const themeText =
-    colorScheme === "light" ? styles.lightText : styles.darkText;
+  const themeText = colorScheme === "light" ? styles.darkText : styles.darkText;
 
   useEffect(() => {
     const backHandler = BackHandler.addEventListener(
@@ -97,33 +99,19 @@ export default function Home() {
     Keyboard.dismiss();
   };
 
-  // Toggle Sidebar
-  const toggleSidebar = () => {
-    setSidebarVisible(!sidebarVisible);
-  };
   return (
     // Bagian Fixed
     <SafeAreaView style={styles.container}>
+      {sidebarVisible ? (
+        <SideBar
+          sidebarVisible={sidebarVisible}
+          toggleSidebar={toggleSidebar}
+        />
+      ) : (
+        <TabLayout sidebarVisible={sidebarVisible} />
+      )}
       {/* <View style={styles.container}> */}
       {/* Overlay when sidebar is visible */}
-      {sidebarVisible && (
-        <View style={styles.overlay} onTouchEnd={toggleSidebar} />
-      )}
-
-      {/* Sidebar */}
-      {sidebarVisible && (
-        <View style={styles.sidebar}>
-          <TouchableOpacity onPress={toggleSidebar} style={styles.closeButton}>
-            <FontAwesome name="times" size={24} color="white" />
-          </TouchableOpacity>
-          <View style={styles.sidebarContent}>
-            <Text style={styles.sidebarItem}>Jadwal</Text>
-            <Text style={styles.sidebarItem}>Profile</Text>
-            <Text style={styles.sidebarItem}>Settings</Text>
-            <Text style={styles.sidebarItem}>Log Out</Text>
-          </View>
-        </View>
-      )}
       {/* Top Box */}
       <View style={styles.topBox}>
         {/* Container for Hamburger + Pendaftaran and Darurat */}
@@ -139,7 +127,6 @@ export default function Home() {
             >
               <FontAwesome name="bars" size={24} color="black" />
             </TouchableOpacity>
-
             <Logo height={25} width={188.17} />
           </View>
           {/* Darurat */}
@@ -159,7 +146,7 @@ export default function Home() {
             <FontAwesome6 name="magnifying-glass" size={20} color="black" />
           )}
           <TextInput
-            style={[styles.barnya, barClicked && styles.barnyaDiclick]}
+            style={[styles.barnya, barClicked && styles.barnyaDiclick, { paddingLeft: 10 }]}
             placeholder="Cari disini..."
             value={search}
             onFocus={handleFocus}
@@ -325,6 +312,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: "100%",
+    backgroundColor: "#F8F8F8"
   },
 
   // topBox ini adalah box header yang berwarna kuning itu
@@ -346,10 +334,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     zIndex: 0,
   },
-  lightText: {
+  darkText: {
     color: "black",
   },
-  darkText: {
+  lightText: {
     color: "white",
   },
   HaDafDar: {
@@ -516,54 +504,6 @@ const styles = StyleSheet.create({
     marginTop: 15,
     alignItems: "center",
     justifyContent: "center",
-  },
-  sideBarLayout: {
-    flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  // Sidebar Styles
-  sidebar: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    width: "80%", // Sidebar width
-    height: "100%",
-    backgroundColor: "black",
-    zIndex: 3,
-    paddingTop: 60,
-    paddingLeft: 20,
-  },
-  closeButton: {
-    marginBottom: 20,
-  },
-  sidebarContent: {
-    flex: 1,
-    justifyContent: "center",
-  },
-  sidebarItem: {
-    color: "white",
-    fontSize: 18,
-    marginBottom: 20,
-  },
-  overlay: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    width: "100%",
-    height: "100%",
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
-    zIndex: 2,
-  },
-  openButton: {
-    position: "absolute",
-    top: 50,
-    left: 20,
-    zIndex: 1,
-    padding: 10,
-    backgroundColor: "#00BFFF",
-    borderRadius: 5,
   },
   text: {
     color: "white",

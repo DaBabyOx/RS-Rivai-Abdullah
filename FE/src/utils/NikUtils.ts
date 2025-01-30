@@ -46,5 +46,5 @@ export const handleCheckNIK = (
 
 // Fungsi untuk navigasi ke halaman OTP setelah konfirmasi KTP
 export const handleConfirm = () => {
-    router.push('/ui/profile/auth/phone-auth/phone-otp/page'); // Navigasi ke halaman OTP
+    router.push('/ui/profile/auth/mail-auth/page'); // Navigasi ke halaman OTP
 };

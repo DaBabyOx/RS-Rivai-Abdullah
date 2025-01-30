@@ -1,16 +1,28 @@
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import React, { useState } from "react";
-
-export default function Jadwal() {
+import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
+import { SafeAreaView } from "react-native-safe-area-context";
+import Feather from "@expo/vector-icons/Feather";
+export default function JadwalPage() {
   // State untuk mengontrol tab yang aktif
   const [activeTab, setActiveTab] = useState("berlangsung"); // Default tab adalah 'berlangsung'
 
   return (
-    <View style={styles.container}>
-      {/* Profil Pasien */}
-      <View style={styles.jadwalHeader}>
-        <Text style={styles.jadwalTitle}>Jadwal</Text>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.jadwalContainer}>
+        <View>
+          <Text style={styles.jadwalTitle}>Jadwal</Text>
+        </View>
+        <View style={styles.iconContainer}>
+          <TouchableOpacity>
+            <FontAwesome6 name="magnifying-glass" size={20} color="black" />
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Feather name="filter" size={24} color="black" />
+          </TouchableOpacity>
+        </View>
       </View>
+
       {/* Switch Tab */}
       <View style={styles.switchContainer}>
         <TouchableOpacity
@@ -20,7 +32,14 @@ export default function Jadwal() {
           ]}
           onPress={() => setActiveTab("berlangsung")}
         >
-          <Text style={styles.switchText}>Berlangsung</Text>
+          <Text
+            style={[
+              styles.switchText,
+              activeTab == "history" && { color: "grey" },
+            ]}
+          >
+            Berlangsung
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={[
@@ -29,21 +48,31 @@ export default function Jadwal() {
           ]}
           onPress={() => setActiveTab("history")}
         >
-          <Text style={styles.switchText}>History</Text>
+          <Text
+            style={[
+              styles.switchText,
+              activeTab == "berlangsung" && { color: "grey" },
+            ]}
+          >
+            History
+          </Text>
         </TouchableOpacity>
       </View>
-
       {/* Konten berdasarkan tab yang aktif */}
       {activeTab === "berlangsung" ? (
         <View style={styles.content}>
-          <Text style={{ color: "lightgrey" }}>Anda Tidak Memiliki Rencana Kunjungan Berlangsung</Text>
+          <FontAwesome6 name="calendar-times" size={90} color="lightgrey" />
+          <Text style={{ color: "lightgrey" }}>
+            Anda Tidak Memiliki Rencana Kunjungan Berlangsung
+          </Text>
         </View>
       ) : (
         <View style={styles.content}>
+          <FontAwesome6 name="list-ul" size={90} color="lightgrey" />
           <Text style={{ color: "lightgrey" }}>Konten History</Text>
         </View>
       )}
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -51,11 +80,20 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    width: "98%",
-    paddingTop: 50,
-    backgroundColor: "#FFFFFF",
-    paddingHorizontal: 7,
+    justifyContent: "flex-start",
+    backgroundColor: "#F8F9FA",
+    padding: 5,
+    width: "100%",
+    paddingHorizontal: 20,
+    height: "100%",
     gap: 30,
+  },
+  jadwalTitle: {
+    fontSize: 30,
+    color: "black",
+    fontWeight: "bold",
+    textAlign: "left",
+    width: "100%",
   },
   switchContainer: {
     backgroundColor: "lightgrey",
@@ -66,17 +104,16 @@ const styles = StyleSheet.create({
   },
   switchButton: {
     fontSize: 15,
-    padding: 20,
-    marginHorizontal: 1,
+    paddingHorizontal: 20,
+    paddingVertical: 6,
     borderRadius: 5,
-    
   },
   activeButton: {
     backgroundColor: "white",
   },
   switchText: {
     color: "#0BAF9A",
-    fontSize: 25,
+    fontSize: 20,
     fontWeight: "bold",
   },
   content: {
@@ -85,15 +122,21 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     width: "100%",
     alignItems: "center",
+    display: "flex",
+    gap: 10,
   },
   jadwalHeader: {
     alignItems: "flex-start",
     width: "100%",
   },
-  jadwalTitle: {
-    fontSize: 30,
-    fontWeight: "bold",
-    color: "black",
-    textAlign: "left",
+  jadwalContainer: {
+    flexDirection: "row", // Letakkan teks dan icon secara horizontal
+    justifyContent: "space-between", // Memberikan ruang antara teks dan ikon
+    alignItems: "center", // Menyelaraskan vertikal ke tengah
+    width: "100%", // Mengisi seluruh lebar kontainer
+  },
+  iconContainer: {
+    flexDirection: "row", // Letakkan ikon secara horizontal
+    gap: 10, // Menambahkan jarak antar ikon
   },
 });

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import RegisterPage from '@/src/app/ui/profile/auth/register/page';
 import LoginPage from '@/src/app/ui/profile/auth/login/page';
-import { styles } from '@/src/utils/UiUtils';
+import { stylesImport } from '@/src/utils/UiUtils';
 
 export function LoggedOutViewClass({ onLogin }: any) {
   const [isLoggedOutView, setIsLoggedOutView] = useState(true);
@@ -12,7 +12,7 @@ export function LoggedOutViewClass({ onLogin }: any) {
     setIsLoggedOutView(!isLoggedOutView);  // Ganti tampilan
   }
   return (
-    <SafeAreaView style={styles.contentContainer}>
+    <SafeAreaView style={stylesImport.contentContainer}>
       {isLoggedOutView ? (
         <LoginPage onLogin={onLogin} onSwitchView={switchView} />
       ) : (

@@ -164,4 +164,40 @@ export const styles = StyleSheet.create({
     height: 40,
     fontSize: 16,
   },
+  scheduleContainer: {
+    flexDirection: "row",
+    marginTop: 20,
+    padding: 15,
+    backgroundColor: "#f9f9f9",
+    borderRadius: 10,
+  },
+  scheduleTitle: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "#0BAF9A",
+  },
+  scheduleItem: {
+    
+    fontSize: 14,
+    color: "#333",
+    marginVertical: 2,
+  },
+  noScheduleText: {
+    fontSize: 14,
+    color: "red",
+  },
+  dayItem: {
+    padding: 12,
+    borderRadius: 8,
+    width: 80,
+    alignItems: "center",
+    marginRight: 8,
+  },
+  dayText: {
+    color: "#fff",
+    fontWeight: "bold",
+  },
+  daysScrollContainer: {
+    flexDirection: "row",
+  },
 });

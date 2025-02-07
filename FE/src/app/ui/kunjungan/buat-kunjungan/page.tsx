@@ -5,6 +5,7 @@ import {
   Image,
   TouchableOpacity,
   TextInput,
+  ScrollView,
 } from "react-native";
 import React, { useState } from "react";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
@@ -20,14 +21,23 @@ import {
   insuranceData,
   poliklinikData,
   doctorData,
+  doctorScheduleData,
 } from "@/src/utils/BuatKunjunganUtils";
 import { styles } from "@/src/utils/ui/UiBuatKunjungan";
-
+import { LinearGradient } from "expo-linear-gradient";
 export default function BuatKunjunganPage({ onLogout }: any) {
   const [selectedInsurance, setSelectedInsurance] = useState(null);
   const [selectedPoliklinik, setSelectedPoliklinik] = useState(null);
   const [selectedDoctor, setSelectedDoctor] = useState(null);
+  const [doctorSchedule, setDoctorSchedule] = useState<string[]>([]);
+
   const [value, setValue] = useState(null);
+
+  const handleDoctorChange = (item: any) => {
+    setSelectedDoctor(item.value);
+    // Update jadwal dokter
+    setDoctorSchedule(doctorScheduleData[item.label] || []);
+  };
 
   const router = useRouter(); // Menggunakan router dari expo-router
   const renderItem = (item: any) => {
@@ -47,7 +57,28 @@ export default function BuatKunjunganPage({ onLogout }: any) {
   };
 
   return (
-    <SafeAreaView style={styles.profileContainer}>
+    <LinearGradient
+      colors={["#F5F7B1", "#FFFFFF"]}
+      locations={[0.02, 1]} // Kuning sedikit banget di bagian atas
+      start={{ x: 0.5, y: 0 }} // Kuning mulai dari tengah horizontal
+      end={{ x: 0.5, y: 0.1 }} // Kuning cuma sampai 10% vertikal
+      style={{
+        flex: 1,
+        width: "100%",
+        alignItems: "center",
+        justifyContent: "flex-start",
+      }}
+    >
+      <SafeAreaView style={{
+              flex: 1,
+              // alignItems: 'center',
+              // justifyContent: 'flex-start',
+              // backgroundColor: '#F8F9FA',
+              // padding: 5,
+              width: '100%',
+              // paddingHorizontal: 20,
+              // height: '100%',
+      }}>
       {/* Profil Pasien */}
       <View style={stylesImport.contentContainer}>
         <TouchableOpacity onPress={() => router.back()}>
@@ -192,35 +223,83 @@ export default function BuatKunjunganPage({ onLogout }: any) {
             </View>
 
             {/* Pilih DOkter */}
-            <View style={styles.infoStyle}>
-              <Dropdown
-                style={styles.dropdown}
-                placeholderStyle={styles.placeholderStyle}
-                selectedTextStyle={styles.selectedTextStyle}
-                inputSearchStyle={styles.inputSearchStyle}
-                iconStyle={styles.iconStyle}
-                data={doctorData}
-                search
-                maxHeight={300}
-                labelField="label"
-                valueField="value"
-                placeholder="Pilih Dokter"
-                searchPlaceholder="Cari Dokter..."
-                value={selectedDoctor}
-                onChange={(item: any) => {
-                  setSelectedDoctor(item.value);
-                }}
-                renderLeftIcon={() => (
-                  <FontAwesome6
-                    style={[styles.icon, { opacity: 0.8 }]}
-                    color="lightgrey"
-                    name="user-doctor"
-                    size={20}
-                  />
-                )}
-                renderItem={renderItem}
-              />
+            <View style={{ paddingVertical: 1, width: "100%" }}>
+              <View style={styles.infoStyle}>
+                <Dropdown
+                  style={styles.dropdown}
+                  placeholderStyle={styles.placeholderStyle}
+                  selectedTextStyle={styles.selectedTextStyle}
+                  inputSearchStyle={styles.inputSearchStyle}
+                  iconStyle={styles.iconStyle}
+                  data={doctorData}
+                  search
+                  maxHeight={300}
+                  labelField="label"
+                  valueField="value"
+                  placeholder="Pilih Dokter"
+                  searchPlaceholder="Cari Dokter..."
+                  value={selectedDoctor}
+                  onChange={handleDoctorChange}
+                  renderLeftIcon={() => (
+                    <FontAwesome6
+                      style={[styles.icon, { opacity: 0.8 }]}
+                      color="lightgrey"
+                      name="user-doctor"
+                      size={20}
+                    />
+                  )}
+                  renderItem={renderItem}
+                />
+              </View>
             </View>
+
+            {/* Jadwal Dokter Section */}
+            <ScrollView style={{ height: "30%" }} horizontal showsHorizontalScrollIndicator={false}>
+              {selectedDoctor && (
+                <View style={styles.scheduleContainer}>
+                  {/* Menampilkan jadwal berdasarkan hari */}
+                  {doctorData.length > 0 ? (
+                    doctorData
+                      .filter((doctor) => doctor.value === selectedDoctor)
+                      .map((doctor, index) => (
+                        <View key={index} style={{ flexDirection: "row" }}>
+                          {[
+                            "Senin",
+                            "Selasa",
+                            "Rabu",
+                            "Kamis",
+                            "Jumat",
+                            "Sabtu",
+                            "Minggu",
+                          ].map((day) => {
+                            const isAvailable = doctor.schedule.includes(day);
+
+                            return (
+                              <TouchableOpacity
+                                key={day}
+                                style={[
+                                  styles.dayItem,
+                                  {
+                                    backgroundColor: isAvailable
+                                      ? "green"
+                                      : "#BDBDBD",
+                                  },
+                                ]}
+                              >
+                                <Text style={styles.dayText}>{day}</Text>
+                              </TouchableOpacity>
+                            );
+                          })}
+                        </View>
+                      ))
+                  ) : (
+                    <Text style={styles.noScheduleText}>
+                      Tidak ada jadwal tersedia
+                    </Text>
+                  )}
+                </View>
+              )}
+            </ScrollView>
           </View>
 
           {/* Buat Pendaftaran Button */}
@@ -233,6 +312,7 @@ export default function BuatKunjunganPage({ onLogout }: any) {
         </View>
       </View>
     </SafeAreaView>
+  </LinearGradient>
   );
 }
 
@@ -259,4 +339,3 @@ export const MenuItem = ({
     </TouchableOpacity>
   </View>
 );
-

@@ -1,10 +1,18 @@
-import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  } from "react-native";
 import React from "react";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Feather from "@expo/vector-icons/Feather";
 import { useRouter } from "expo-router";
+import { LinearGradient } from "expo-linear-gradient";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export function LoggedInViewClass({ onLogout }: any) {
   // const [notificationsEnabled, setNotificationsEnabled] = useState(true);
@@ -13,77 +21,106 @@ export function LoggedInViewClass({ onLogout }: any) {
   const router = useRouter(); // Menggunakan router dari expo-router
 
   return (
-    <View style={styles.profileContainer}>
-      {/* Profil Pasien */}
-      <View style={styles.profileHeader}>
-        <Text style={styles.profileTitle}>Profil Pasien</Text>
-      </View>
+    <LinearGradient
+      colors={["#F5F7B1", "#FFFFFF"]}
+      locations={[0.02, 1]} // Kuning sedikit banget di bagian atas
+      start={{ x: 0.5, y: 0 }} // Kuning mulai dari tengah horizontal
+      end={{ x: 0.5, y: 0.1 }} // Kuning cuma sampai 10% vertikal
+      style={{
+        flex: 1,
+        padding: 5,
+        width: "100%",
+        height: "100%",
 
-      {/* Profile Header */}
-      <View style={styles.profileInfoContainer}>
-        <View style={styles.profileInfoBox}>
-          <Image
-            style={styles.avatar}
-            source={{
-              uri: "https://via.placeholder.com/100/cccccc/ffffff?text=Avatar",
-            }}
-            resizeMode="cover" // Tambahkan resizeMode untuk memastikan gambar terkelola dengan baik
-          />
-          <View style={styles.profileDetails}>
-            <Text style={styles.userNameStyle}>Mariko</Text>
-            <Text style={styles.userRecordNoStyle}>20231201-RA001</Text>
+      }}
+    >
+      <SafeAreaView
+        style={{
+          flex: 1,
+          alignItems: "center",
+          width: "100%",
+        }}
+      >
+        {/* <View style={{ flex: 1 }}> */}
+        {/* Konten utama */}
+        {/* <View style={{ flex: 1, backgroundColor: "#FFFFFF" }}> */}
+        <View style={styles.profileContainer}>
+          {/* Profil Pasien */}
+          <View style={styles.profileHeader}>
+            <Text style={styles.profileTitle}>Profil Pasien</Text>
           </View>
-        </View>
 
-        {/* Konten Menu Profile Section */}
-        <View style={styles.infoStyle}>
-          <MenuItem
-            icon={
-              <FontAwesome5
-                name="list-alt"
-                size={21}
-                color="rgba(0, 0, 0, 0.7)"
+          {/* Profile Header */}
+          <View style={styles.profileInfoContainer}>
+            <View style={styles.profileInfoBox}>
+              <Image
+                style={styles.avatar}
+                source={{
+                  uri: "https://via.placeholder.com/100/cccccc/ffffff?text=Avatar",
+                }}
+                resizeMode="cover"
               />
-            }
-            label="Pendaftaran"
-          />
-          <MenuItem
-            icon={
-              <MaterialIcons
-                name="route"
-                size={24}
-                color="rgba(0, 0, 0, 0.7)"
-                style={{ transform: [{ rotate: "90deg" }] }}
-              />
-            }
-            label="Alur Pendaftaran"
-          />
-          <MenuItem
-            icon={
-              <Ionicons
-                name="settings-outline"
-                size={24}
-                color="rgba(0, 0, 0, 0.7)"
-              />
-            }
-            label="Pengaturan"
-            onPress={() =>
-              router.push("/ui/profile/auth/login/Pengaturan/page")
-            }
-          />
-          <MenuItem
-            icon={<Feather name="phone" size={24} color="rgba(0, 0, 0, 0.7)" />}
-            label="Hubungi Kami"
-          />
-        </View>
-      </View>
+              <View style={styles.profileDetails}>
+                <Text style={styles.userNameStyle}>Mariko</Text>
+                <Text style={styles.userRecordNoStyle}>20231201-RA001</Text>
+              </View>
+            </View>
 
-      {/* Logout Button */}
-      <TouchableOpacity style={styles.logoutButton} onPress={onLogout}>
-        <Ionicons name="log-out-outline" size={24} color="#ffffff" />
-        <Text style={styles.logoutText}>Sign Out</Text>
-      </TouchableOpacity>
-    </View>
+            {/* Konten Menu Profile Section */}
+            <View style={styles.infoStyle}>
+              <MenuItem
+                icon={
+                  <FontAwesome5
+                    name="list-alt"
+                    size={21}
+                    color="rgba(0, 0, 0, 0.7)"
+                  />
+                }
+                label="Pendaftaran"
+              />
+              <MenuItem
+                icon={
+                  <MaterialIcons
+                    name="route"
+                    size={24}
+                    color="rgba(0, 0, 0, 0.7)"
+                    style={{ transform: [{ rotate: "90deg" }] }}
+                  />
+                }
+                label="Alur Pendaftaran"
+              />
+              <MenuItem
+                icon={
+                  <Ionicons
+                    name="settings-outline"
+                    size={24}
+                    color="rgba(0, 0, 0, 0.7)"
+                  />
+                }
+                label="Pengaturan"
+                onPress={() =>
+                  router.push("/ui/profile/auth/login/Pengaturan/page")
+                }
+              />
+              <MenuItem
+                icon={
+                  <Feather name="phone" size={24} color="rgba(0, 0, 0, 0.7)" />
+                }
+                label="Hubungi Kami"
+              />
+            </View>
+          </View>
+
+          {/* Logout Button */}
+          <TouchableOpacity style={styles.logoutButton} onPress={onLogout}>
+            <Ionicons name="log-out-outline" size={24} color="#ffffff" />
+            <Text style={styles.logoutText}>Sign Out</Text>
+          </TouchableOpacity>
+        </View>
+        {/* </View> */}
+        {/* </View> */}
+      </SafeAreaView>
+    </LinearGradient>
   );
 }
 
@@ -115,9 +152,7 @@ const styles = StyleSheet.create({
   profileContainer: {
     flex: 1,
     alignItems: "center",
-    width: "98%",
-    paddingTop: 50,
-    backgroundColor: "#FFFFFF",
+    width: "100%",
     paddingHorizontal: 7,
     gap: 30,
   },
@@ -148,13 +183,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     borderRadius: 10,
     gap: 20,
-    paddingLeft: 20
+    paddingLeft: 20,
   },
   avatar: {
     width: 90,
     height: 90,
     borderRadius: 50,
-    backgroundColor: "white"
+    backgroundColor: "white",
   },
   profileDetails: {
     alignItems: "flex-start",

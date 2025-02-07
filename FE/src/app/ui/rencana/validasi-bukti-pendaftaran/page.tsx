@@ -16,6 +16,7 @@ import {
   handleCheckBookingCode,
 } from "@/src/utils/CodeBookingUtils"; // Pastikan import yang benar
 import AntDesign from "@expo/vector-icons/build/AntDesign";
+import { LinearGradient } from "expo-linear-gradient";
 
 export default function BuktiPendaftaranPage() {
   const [bookingCode, setBookingCode] = useState<string>(""); // Kode booking input state
@@ -24,7 +25,28 @@ export default function BuktiPendaftaranPage() {
   const router = useRouter(); // Menggunakan router dari expo-router
   
   return (
-    <SafeAreaView style={stylesImport.contentContainer}>
+    <LinearGradient
+      colors={["#F5F7B1", "#FFFFFF"]}
+      locations={[0.02, 1]} // Kuning sedikit banget di bagian atas
+      start={{ x: 0.5, y: 0 }} // Kuning mulai dari tengah horizontal
+      end={{ x: 0.5, y: 0.1 }} // Kuning cuma sampai 10% vertikal
+      style={{
+        flex: 1,
+        width: "100%",
+        alignItems: "center",
+        justifyContent: "flex-start",
+      }}
+    >
+      <SafeAreaView style={{
+              flex: 1,
+              // alignItems: 'center',
+              // justifyContent: 'flex-start',
+              // backgroundColor: '#F8F9FA',
+              // padding: 5,
+              width: '100%',
+              // paddingHorizontal: 20,
+              // height: '100%',
+      }}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={stylesImport.contentContainer}>
           <TouchableOpacity onPress={() => router.back()}>
@@ -104,5 +126,6 @@ export default function BuktiPendaftaranPage() {
         </View>
       </TouchableWithoutFeedback>
     </SafeAreaView>
+    </LinearGradient>
   );
 }

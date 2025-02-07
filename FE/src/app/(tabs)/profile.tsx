@@ -1,7 +1,8 @@
-import { SafeAreaView, ScrollView, StyleSheet, View } from 'react-native';
+import { ScrollView, StyleSheet, View } from 'react-native';
 import React, { useState } from 'react';
 import { LoggedInView } from '@/src/app/ui/profile/ProfileUI';
 import LoggedOutView from '@/src/app/ui/profile/ProfileUI';
+import { LinearGradient } from 'expo-linear-gradient';
 
 
 export default function ProfilePage() {
@@ -9,8 +10,20 @@ export default function ProfilePage() {
 
   return (
     // <SafeAreaView>
-    <ScrollView contentContainerStyle={{ flexGrow: 1 }} showsVerticalScrollIndicator={false}>
+    // <ScrollView contentContainerStyle={{ flexGrow: 1 }} >
 
+        <LinearGradient
+          colors={["#F5F7B1", "#FFFFFF"]}
+          locations={[0.02, 1]} // Kuning sedikit banget di bagian atas
+          start={{ x: 0.5, y: 0 }} // Kuning mulai dari tengah horizontal
+          end={{ x: 0.5, y: 0.1 }} // Kuning cuma sampai 10% vertikal
+          style={{
+            flex: 1,
+            width: "100%",
+            alignItems: "center",
+            justifyContent: "flex-start",
+          }}
+        >
         <View style={styles.container}>
           {loggedIn ? (
             <LoggedInView onLogout={() => setLoggedIn(false)} />
@@ -18,7 +31,8 @@ export default function ProfilePage() {
             <LoggedOutView onLogin={() => setLoggedIn(true)} />
           )}
         </View>
-      </ScrollView>
+        </LinearGradient>
+      // </ScrollView>
     // </SafeAreaView>
   );
 }
@@ -28,9 +42,9 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'flex-start',
-    backgroundColor: '#F8F9FA',
-    padding: 5,
+    backgroundColor: 'transparent',
+    // padding: 5,
     width: '100%',
-    height: '100%'
+    // height: '100%'
   }
 });

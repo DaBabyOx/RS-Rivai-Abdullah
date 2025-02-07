@@ -12,6 +12,7 @@ import { stylesImport } from "@/src/utils/UiUtils";
 import { SafeAreaView } from "react-native";
 import { dummyData, handleCheckNIK, handleConfirm } from "@/src/utils/NikUtils"; // Pastikan import yang benar
 import { useRouter } from "expo-router";
+import { LinearGradient } from "expo-linear-gradient";
 
 export default function RegisterPage() {
   // State declarations
@@ -32,156 +33,176 @@ export default function RegisterPage() {
   };
 
   return (
-    <SafeAreaView style={stylesImport.contentContainer}>
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View style={stylesImport.contentContainer}>
-          <Text style={stylesImport.loginHeaderTextStyle}>
-            Register Account
-          </Text>
-          <View style={stylesImport.loginHeaderContainer}>
-            <Text style={stylesImport.loginDescStyle}>
-              Silahkan register dengan mengisi NIK anda.
+    <LinearGradient
+      colors={["#F5F7B1", "#FFFFFF"]}
+      locations={[0.02, 1]} // Kuning sedikit banget di bagian atas
+      start={{ x: 0.5, y: 0 }} // Kuning mulai dari tengah horizontal
+      end={{ x: 0.5, y: 0.1 }} // Kuning cuma sampai 10% vertikal
+      style={{
+        flex: 1,
+        width: "100%",
+        alignItems: "center",
+        justifyContent: "flex-start",
+      }}
+    >
+      <SafeAreaView style={{
+              flex: 1,
+              alignItems: 'center',
+              justifyContent: 'flex-start',
+              // backgroundColor: '#F8F9FA',
+              // padding: 5,
+              width: '100%',
+              // paddingHorizontal: 20,
+              // height: '100%',
+      }}>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <View style={stylesImport.contentContainer}>
+            <Text style={stylesImport.loginHeaderTextStyle}>
+              Register Account
             </Text>
-            <Text
+            <View style={stylesImport.loginHeaderContainer}>
+              <Text style={stylesImport.loginDescStyle}>
+                Silahkan register dengan mengisi NIK anda.
+              </Text>
+              <Text
+                style={{
+                  fontSize: 28,
+                  fontWeight: "bold",
+                  color: "black",
+                  textAlign: "left",
+                  opacity: 0.5,
+                }}
+              >
+                Register
+              </Text>
+            </View>
+
+            {/* Input NIK Section */}
+            <View
               style={{
-                fontSize: 28,
-                fontWeight: "bold",
-                color: "black",
-                textAlign: "left",
-                opacity: 0.5,
+                width: "100%",
+                position: "relative",
+                alignItems: "center",
+                justifyContent: "center",
+                marginTop: 20,
               }}
             >
-              Register
-            </Text>
-          </View>
+              <FontAwesome
+                name="vcard-o"
+                size={19}
+                color="#0BAF9A"
+                style={{
+                  position: "absolute",
+                  top: 15,
+                  left: 24,
+                  zIndex: 10,
+                  opacity: 0.4,
+                }}
+              />
+              <TextInput
+                placeholder="NIK KTP"
+                placeholderTextColor="gray"
+                keyboardType="numeric"
+                maxLength={16}
+                value={nik}
+                style={stylesImport.inputStyle}
+                onChangeText={(text) => setNik(text)} // update state NIK
+                onSubmitEditing={() => {
+                  handleCheckNIK(nik, setNikError, setAdditionalFields); // Validasi NIK
+                  Keyboard.dismiss();
+                }}
+              />
+            </View>
 
-          {/* Input NIK Section */}
-          <View
-            style={{
-              width: "100%",
-              position: "relative",
-              alignItems: "center",
-              justifyContent: "center",
-              marginTop: 20,
-            }}
-          >
-            <FontAwesome
-              name="vcard-o"
-              size={19}
-              color="#0BAF9A"
-              style={{
-                position: "absolute",
-                top: 15,
-                left: 24,
-                zIndex: 10,
-                opacity: 0.4,
-              }}
-            />
-            <TextInput
-              placeholder="NIK KTP"
-              placeholderTextColor="gray"
-              keyboardType="numeric"
-              maxLength={16}
-              value={nik}
-              style={stylesImport.inputStyle}
-              onChangeText={(text) => setNik(text)} // update state NIK
-              onSubmitEditing={() => {
-                handleCheckNIK(nik, setNikError, setAdditionalFields); // Validasi NIK
-                Keyboard.dismiss();
-              }}
-            />
-          </View>
+            {/* Error NIK Section */}
+            {nikError ? (
+              <Text style={{ color: "red", marginTop: 5, textAlign: "center" }}>
+                {nikError}
+              </Text>
+            ) : null}
 
-          {/* Error NIK Section */}
-          {nikError ? (
-            <Text style={{ color: "red", marginTop: 5, textAlign: "center" }}>
-              {nikError}
-            </Text>
-          ) : null}
-
-          {/* Render Input Tambahan akan muncul ketika NIK valid */}
-          {additionalFields && (
-            <View style={{ marginTop: 10, width: "100%" }}>
-              {Object.entries(dummyData).map(([key, value]) => (
-                <View key={key} style={{ marginBottom: 10 }}>
-                  <View
-                    style={{
-                      width: "100%",
-                      position: "relative",
-                      alignItems: "center",
-                    }}
-                  >
-                    <FontAwesome
-                      name="vcard-o"
-                      size={19}
-                      color="#0BAF9A"
+            {/* Render Input Tambahan akan muncul ketika NIK valid */}
+            {additionalFields && (
+              <View style={{ marginTop: 10, width: "100%" }}>
+                {Object.entries(dummyData).map(([key, value]) => (
+                  <View key={key} style={{ marginBottom: 10 }}>
+                    <View
                       style={{
-                        position: "absolute",
-                        top: 15,
-                        left: 24,
-                        zIndex: 10,
-                        opacity: 0.4,
+                        width: "100%",
+                        position: "relative",
+                        alignItems: "center",
                       }}
-                    />
-                    <TextInput
-                      value={value}
-                      editable={false}
-                      style={[
-                        stylesImport.inputStyle,
-                        { backgroundColor: "white", paddingLeft: 54 },
-                      ]} // Padding kiri untuk memberi ruang untuk ikon
-                    />
+                    >
+                      <FontAwesome
+                        name="vcard-o"
+                        size={19}
+                        color="#0BAF9A"
+                        style={{
+                          position: "absolute",
+                          top: 15,
+                          left: 24,
+                          zIndex: 10,
+                          opacity: 0.4,
+                        }}
+                      />
+                      <TextInput
+                        value={value}
+                        editable={false}
+                        style={[
+                          stylesImport.inputStyle,
+                          { backgroundColor: "white", paddingLeft: 54 },
+                        ]} // Padding kiri untuk memberi ruang untuk ikon
+                      />
+                    </View>
                   </View>
-                </View>
-              ))}
-            </View>
-          )}
-
-          {/* Tombol Konfirmasi Data KTP */}
-          {additionalFields ? (
-            <View style={stylesImport.buttonContainer}>
-              <View style={stylesImport.loginButton}>
-                <TouchableOpacity onPress={handleConfirmKTP}>
-                  <Text style={stylesImport.loginButtonText}>
-                    Konfirmasi Data KTP
-                  </Text>
-                </TouchableOpacity>
+                ))}
               </View>
-            </View>
-          ) : (
-            <View style={{ flexDirection: "column", width: "100%" }}>
+            )}
+
+            {/* Tombol Konfirmasi Data KTP */}
+            {additionalFields ? (
               <View style={stylesImport.buttonContainer}>
                 <View style={stylesImport.loginButton}>
-                  <TouchableOpacity
-                    onPress={() =>
-                      handleCheckNIK(nik, setNikError, setAdditionalFields)
-                    }
-                  >
-                    <Text style={stylesImport.loginButtonText}>Cek</Text>
+                  <TouchableOpacity onPress={handleConfirmKTP}>
+                    <Text style={stylesImport.loginButtonText}>
+                      Konfirmasi Data KTP
+                    </Text>
                   </TouchableOpacity>
                 </View>
               </View>
-              <View
-                style={{
-                  justifyContent: "center",
-                  flexDirection: "row",
-                  alignItems: "center",
-                  gap: 5,
-                }}
-              >
-                <Text>Sudah memiliki akun?</Text>
-                <TouchableOpacity
-                  onPress={() => router.back()}
+            ) : (
+              <View style={{ flexDirection: "column", width: "100%" }}>
+                <View style={stylesImport.buttonContainer}>
+                  <View style={stylesImport.loginButton}>
+                    <TouchableOpacity
+                      onPress={() =>
+                        handleCheckNIK(nik, setNikError, setAdditionalFields)
+                      }
+                    >
+                      <Text style={stylesImport.loginButtonText}>Cek</Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+                <View
+                  style={{
+                    justifyContent: "center",
+                    flexDirection: "row",
+                    alignItems: "center",
+                    gap: 5,
+                  }}
                 >
-                  <Text style={stylesImport.haveNoAccountStyle}>
-                    Login Sekarang
-                  </Text>
-                </TouchableOpacity>
+                  <Text>Sudah memiliki akun?</Text>
+                  <TouchableOpacity onPress={() => router.back()}>
+                    <Text style={stylesImport.haveNoAccountStyle}>
+                      Login Sekarang
+                    </Text>
+                  </TouchableOpacity>
+                </View>
               </View>
-            </View>
-          )}
-        </View>
-      </TouchableWithoutFeedback>
-    </SafeAreaView>
+            )}
+          </View>
+        </TouchableWithoutFeedback>
+      </SafeAreaView>
+    </LinearGradient>
   );
 }

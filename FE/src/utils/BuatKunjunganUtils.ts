@@ -45,25 +45,35 @@ export const poliklinikData = [
 ];
 
 
+
 export const doctorData = [
-    { label: "Dr. Andi Firmansyah, SpPD", value: "1" },
-    { label: "Dr. Siti Aisyah, SpM", value: "2" },
-    { label: "Dr. Budi Santoso, SpA", value: "3" },
-    { label: "Dr. Rani Kusuma, SpKK", value: "4" },
-    { label: "Dr. Aditya Nugraha, SpOG", value: "5" },
-    { label: "Dr. Iqbal Pratama, SpOT", value: "6" },
-    { label: "Dr. Citra Dewi, SpJP", value: "7" },
-    { label: "Dr. Johan Hartono, SpU", value: "8" },
-    { label: "Dr. Melani Tanjung, SpTHT", value: "9" },
-    { label: "Dr. Ahmad Faisal, SpB", value: "10" },
-    { label: "Dr. Dwi Lestari, SpP", value: "11" },
-    { label: "Dr. Heru Gunawan, SpRad", value: "12" },
-    { label: "Dr. Lina Kartika, SpPD-KGEH", value: "13" },
-    { label: "Dr. Fajar Hidayat, SpAn", value: "14" },
-    { label: "Dr. Laila Nuraini, SpKJ", value: "15" },
-    { label: "Dr. Yudi Hartawan, SpN", value: "16" },
-    { label: "Dr. Tri Utami, SpG", value: "17" },
-    { label: "Dr. Rudi Suhendra, SpHem", value: "18" },
-    { label: "Dr. Devi Pramesti, SpOnk", value: "19" },
-    { label: "Dr. Wahyu Ramdhan, SpEndo", value: "20" },
-];
+    { label: "Dr. Andi Firmansyah, SpPD", value: "1", schedule: ["Senin", "Rabu", "Kamis"] },
+    { label: "Dr. Siti Aisyah, SpM", value: "2", schedule: ["Selasa", "Jumat"] },
+    { label: "Dr. Budi Santoso, SpA", value: "3", schedule: ["Senin", "Kamis", "Sabtu"] },
+    { label: "Dr. Rani Kusuma, SpKK", value: "4", schedule: ["Rabu", "Jumat"] },
+    { label: "Dr. Aditya Nugraha, SpOG", value: "5", schedule: ["Selasa", "Minggu"] },
+    { label: "Dr. Iqbal Pratama, SpOT", value: "6", schedule: ["Senin", "Kamis"] },
+    { label: "Dr. Citra Dewi, SpJP", value: "7", schedule: ["Selasa", "Sabtu"] },
+    { label: "Dr. Johan Hartono, SpU", value: "8", schedule: ["Rabu", "Minggu"] },
+    { label: "Dr. Melani Tanjung, SpTHT", value: "9", schedule: ["Senin", "Jumat"] },
+    { label: "Dr. Ahmad Faisal, SpB", value: "10", schedule: ["Selasa", "Kamis"] },
+    { label: "Dr. Dwi Lestari, SpP", value: "11", schedule: ["Rabu", "Sabtu"] },
+    { label: "Dr. Heru Gunawan, SpRad", value: "12", schedule: ["Jumat", "Minggu"] },
+    { label: "Dr. Lina Kartika, SpPD-KGEH", value: "13", schedule: ["Senin", "Rabu"] },
+    { label: "Dr. Fajar Hidayat, SpAn", value: "14", schedule: ["Kamis", "Minggu"] },
+    { label: "Dr. Laila Nuraini, SpKJ", value: "15", schedule: ["Selasa", "Sabtu"] },
+    { label: "Dr. Yudi Hartawan, SpN", value: "16", schedule: ["Jumat", "Minggu"] },
+    { label: "Dr. Tri Utami, SpG", value: "17", schedule: ["Senin", "Rabu", "Kamis"] },
+    { label: "Dr. Rudi Suhendra, SpHem", value: "18", schedule: ["Selasa", "Sabtu"] },
+    { label: "Dr. Devi Pramesti, SpOnk", value: "19", schedule: ["Kamis", "Minggu"] },
+    { label: "Dr. Wahyu Ramdhan, SpEndo", value: "20", schedule: ["Senin", "Jumat"] },
+  ];
+  
+
+
+
+export const doctorScheduleData: {[key: string]: string[]} = {
+    "Dokter A": ["Senin", "Selasa", "Kamis"],
+    "Dokter B": ["Rabu", "Jumat"],
+    "Dokter C": ["Senin", "Rabu", "Sabtu"],
+}

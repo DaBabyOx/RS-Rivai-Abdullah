@@ -10,6 +10,7 @@ import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { StyleSheet } from "react-native";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import { LinearGradient } from "expo-linear-gradient";
 
 export default function PhoneAuthPage() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -17,6 +18,18 @@ export default function PhoneAuthPage() {
   const toggleDarkMode = () => setIsDarkMode((prev) => !prev);
 
   return (
+    <LinearGradient
+      colors={["#F5F7B1", "#FFFFFF"]}
+      locations={[0.02, 1]} // Kuning sedikit banget di bagian atas
+      start={{ x: 0.5, y: 0 }} // Kuning mulai dari tengah horizontal
+      end={{ x: 0.5, y: 0.1 }} // Kuning cuma sampai 10% vertikal
+      style={{
+        flex: 1,
+        width: "100%",
+        alignItems: "center",
+        justifyContent: "flex-start",
+      }}
+    >
     <SafeAreaView style={styles.container}>
       <View style={stylesImport.contentContainer}>
         {/* Header */}
@@ -62,6 +75,7 @@ export default function PhoneAuthPage() {
         </View>
       </View>
     </SafeAreaView>
+    </LinearGradient>
   );
 }
 
@@ -90,12 +104,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#F8F9FA",
-    // padding: 5,
-    width: "100%",
-    paddingHorizontal: 20,
-    height: "100%",
+
   },
   infoStyle: {
     flex: 1,

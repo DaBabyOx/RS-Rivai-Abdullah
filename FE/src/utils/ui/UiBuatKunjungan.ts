@@ -111,8 +111,6 @@ export const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: "#0BAF9A",
     borderRadius: 6,
-    borderColor: "yellow",
-    borderWidth: 0.5,
   },
   logoutText: {
     color: "#FFFFFF",
@@ -166,7 +164,6 @@ export const styles = StyleSheet.create({
   },
   scheduleContainer: {
     flexDirection: "row",
-    marginTop: 20,
     padding: 15,
     backgroundColor: "#f9f9f9",
     borderRadius: 10,
@@ -192,10 +189,6 @@ export const styles = StyleSheet.create({
     width: 80,
     alignItems: "center",
     marginRight: 8,
-  },
-  dayText: {
-    color: "#fff",
-    fontWeight: "bold",
   },
   daysScrollContainer: {
     flexDirection: "row",

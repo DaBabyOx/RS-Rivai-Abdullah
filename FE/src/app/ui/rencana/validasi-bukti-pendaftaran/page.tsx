@@ -39,13 +39,7 @@ export default function BuktiPendaftaranPage() {
     >
       <SafeAreaView style={{
               flex: 1,
-              // alignItems: 'center',
-              // justifyContent: 'flex-start',
-              // backgroundColor: '#F8F9FA',
-              // padding: 5,
               width: '100%',
-              // paddingHorizontal: 20,
-              // height: '100%',
       }}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={stylesImport.contentContainer}>
